@@ -20,7 +20,7 @@ Implementation of Remote Shell based on RPC mechanism
 - BI12-074 [Đoàn Đình Đăng](https://github.com/dangdd2003)
 - BI12-076 [Mai Hải Đăng]()
 - BI11-113 [Nguyễn Quang Huy](https://github.com/Dev789-del)
--
+- BI12-475 [Nguyễn Hoàng Tùng](https://github.com/Tonguesten36)
 -
 
 (Fill the name and your github link here)
