@@ -9,6 +9,7 @@ Implementation of Remote Shell based on RPC mechanism
 ## Implementation
 
 - ...
+-The rpc/rpc.h is part of the RPC library. On some systems, you might need to install the RPC library like on Ubuntu/Linux(UNIX) you can install it with sudo apt-get install rpcbind libtirpc-dev
 
 ## Deployment
 
