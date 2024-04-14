@@ -6,8 +6,10 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+
 #define PORT 12345
 #define BUFFER_SIZE 1024
+
 
 void handle_client(int client_socket) {
     char buffer[BUFFER_SIZE];
@@ -41,10 +43,16 @@ void handle_client(int client_socket) {
 }
 
 int main() {
+
     int server_socket, client_socket;
     struct sockaddr_in server_address, client_address;
     socklen_t client_address_length;
-
+    // Set socket option to reuse address
+    int reuse = 1;
+    if (setsockopt(server_socket, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse)) < 0) {
+        perror("Error setting socket option");
+        exit(1);
+    }
     // Create socket
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (server_socket < 0) {
@@ -88,4 +96,3 @@ int main() {
 
     return 0;
 }
-//
