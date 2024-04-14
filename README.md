@@ -9,12 +9,38 @@ Implementation of Remote Shell based on RPC mechanism
 ## Implementation
 
 - ...
--The rpc/rpc.h is part of the RPC library. On some systems, you might need to install the RPC library like on Ubuntu/Linux(UNIX) you can install it with sudo apt-get install rpcbind libtirpc-dev
+- The rpc/rpc.h is part of the RPC library. On some systems, you might need to install the RPC library like on Ubuntu/Linux(UNIX) you can install it with `sudo apt-get install rpcbind libtirpc-dev`
 
 ## Deployment
 
-- ...
-
+- Requirement
+    - rpcgen - generate RPC function
+    - rpcbind - map rpc generic addresses with RPC program
+    - gcc - C compiler
+- Start
+    ```bash
+    chmod +x Makefile
+    ./Makefile
+    ```
+- Run
+    - Prepare rpc env (with root)
+    ```bash
+    rpcbind start # start rpcbind
+    rpcinfo # check rpc status
+    ```
+    - Open a shell
+    ```bash
+    ./server
+    ```
+    - Open second shell
+    ```bash\
+    ./client
+    ```
+- Stop (find and kill the process)
+```bash
+ps -ef | grep server
+kill {PID of ./server}
+```
 ## Contributors
 
 - BI12-073 [Trần Hải Đăng](https://github.com/thdgg)
