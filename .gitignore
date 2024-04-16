@@ -53,3 +53,11 @@ dkms.conf
 
 # others
 .vscode/
+
+# rpc
+client
+server
+shell.h
+shell_clnt.c
+shell_svc.c
+shell_xdr.c

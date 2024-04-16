@@ -16,11 +16,10 @@ Implementation of Remote Shell based on RPC mechanism
 - Requirement
     - rpcgen - generate RPC function
     - rpcbind - map rpc generic addresses with RPC program
-    - gcc - C compiler
+    - gcc, GNU make - C compiler
 - Start
     ```bash
-    chmod +x Makefile
-    ./Makefile
+    make
     ```
 - Run
     - Prepare rpc env (with root)
@@ -40,6 +39,10 @@ Implementation of Remote Shell based on RPC mechanism
 ```bash
 ps -ef | grep server
 kill {PID of ./server}
+```
+- Clean
+```bash
+make clean
 ```
 ## Contributors
 
