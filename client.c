@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
-#define CMD_LENGTH 1000
 
 int main(int argc, char *argv[]) {
   char *host = argv[1]; // host ip address
@@ -12,7 +11,7 @@ int main(int argc, char *argv[]) {
     host = "localhost";
   }
   CLIENT *cl; // init client
-  cl = clnt_create(host, SHELL_PROG, SHELL_VERS, "netpath");
+  cl = clnt_create(host, SHELL_PROG, SHELL_VERS, "tcp");
   if (cl == NULL) {
     clnt_pcreateerror(host);
     exit(EXIT_FAILURE);
@@ -21,14 +20,17 @@ int main(int argc, char *argv[]) {
   }
 
   buffer *buff = malloc(sizeof(buffer));
-  char *command_line = malloc(CMD_LENGTH);
+  char *command_line = malloc(MAX_SIZE);
   int n;
   buffer *result;
   for (;;) {
+    // set bytes of the buffers to zero
     bzero(buff, sizeof(buffer));
-    bzero(command_line, CMD_LENGTH);
+    bzero(command_line, MAX_SIZE);
+
+    // read input command_line from stdin
     n = 0;
-    printf("input> ");
+    printf("> ");
     while ((command_line[n++] = getchar()) != '\n')
       ;
     if (strncmp("exit", command_line, 4) == 0) {
@@ -38,6 +40,8 @@ int main(int argc, char *argv[]) {
       shell_output_1(buff, cl);
       break;
     }
+
+    // send to server and get result
     strcpy(buff->input, command_line);
     buff->numbytes = sizeof(command_line);
     result = shell_output_1(buff, cl);
@@ -45,7 +49,9 @@ int main(int argc, char *argv[]) {
       clnt_perror(cl, host);
       exit(EXIT_FAILURE);
     }
-    printf("output> %s\n", result->input);
+
+    // get result
+    printf("Size of output: %d\n%s\n", result->numbytes, result->input);
   }
 
   return EXIT_SUCCESS;
