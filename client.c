@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
     host = "localhost";
   }
   CLIENT *cl; // init client
-  cl = clnt_create(host, SHELL_PROG, SHELL_VERS, "tcp");
+  cl = clnt_create(host, SHELL_PROG, SHELL_VERS, "netpath");
   if (cl == NULL) {
     clnt_pcreateerror(host);
     exit(EXIT_FAILURE);
@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     while ((command_line[n++] = getchar()) != '\n')
       ;
     if (strncmp("exit", command_line, 4) == 0) {
-      printf("Client exit!");
+      printf("Client exit!\n");
       strcpy(buff->input, command_line);
       buff->numbytes = sizeof(command_line);
       shell_output_1(buff, cl);
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
       clnt_perror(cl, host);
       exit(EXIT_FAILURE);
     }
-    printf("output> %s", result->input);
+    printf("output> %s\n", result->input);
   }
 
   return EXIT_SUCCESS;
