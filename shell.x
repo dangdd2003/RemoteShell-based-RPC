@@ -1,5 +1,5 @@
-const LENGTH = 1024;
-typedef char command[LENGTH];
+const MAX_SIZE = 4096;
+typedef char command[MAX_SIZE];
 
 struct buffer
 {
