@@ -33,7 +33,7 @@ Implementation of Remote Shell based on RPC mechanism
     ```
     - Open second shell
     ```bash\
-    ./client
+    ./client {host - optional, default is localhost}
     ```
 - Stop (find and kill the process)
 ```bash
