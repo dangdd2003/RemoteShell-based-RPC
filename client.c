@@ -30,7 +30,11 @@ int main(int argc, char *argv[]) {
 
     // read input command_line from stdin
     n = 0;
-    printf("> ");
+
+    char cwd[1024];
+    getcwd(cwd, sizeof(cwd));
+    printf("%s>", cwd); // shell's current directory
+    
     while ((command_line[n++] = getchar()) != '\n')
       ;
     if (strncmp("exit", command_line, 4) == 0) {
@@ -51,7 +55,8 @@ int main(int argc, char *argv[]) {
     }
 
     // get result
-    printf("Size of output: %d\n%s\n", result->numbytes, result->input);
+    // printf("Size of output: %d\n", result->numbytes);
+    printf("%s\n", result->input);
   }
 
   return EXIT_SUCCESS;
