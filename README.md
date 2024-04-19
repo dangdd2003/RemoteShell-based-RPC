@@ -86,7 +86,22 @@ make clean
 ## Scenario Demonstrate
 
 - Client Shell
+  ```bash
+  root@client> ./client
+  Connect successfully!
+  > echo HelloWorld!
+  HelloWorld!
+  ```
+  - In client shell, after connecting successully, the client takes input signal from the server. Then it will handle our input for the output. Finally, it will send the output back to the server.
+  - This is an example of client handle when user input "HelloWorld!". After connecting to the client, the input signal will be handled. If the output is appeared, so that it is successfully sent back to the server shell.
 - Server Shell
+  ```bash
+  root@server> ./server
+  Client enter: echo HelloWorld!
+  HelloWorld!
+  ```
+  - In server shell, it authenticates sends a input command from the user. After user inputs something and enter, it will show the input and send the signal to the client shell.
+  - For example, we want to send the input "HelloWorld!" to the client. In bash, the first line for opening a server shell, the second for our input and the last for our output after the signal sends successfully to the client and sends the output back to the server.
 
 ## Contributors
 
